@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HousingService } from '../housing.service';
+import { IHousingLocation1 } from '../housing-location1';
 
 @Component({
   selector: 'app-details',
@@ -10,11 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-  housingLocationId = 0;
+  housingService: HousingService = inject(HousingService);
+  housingLocation: IHousingLocation1 | undefined;
 
   constructor() {
-    this.route.params.subscribe((params) => {
-      this.housingLocationId = params['id'];
-    });
+    const housingLocationId = parseInt(this.route.snapshot.paramMap.get('id')!);
+    this.housingLocation =
+      this.housingService.getHousingLocationById(housingLocationId);
   }
 }
