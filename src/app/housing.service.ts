@@ -115,4 +115,9 @@ export class HousingService {
   getHousingLocationById(id: number): IHousingLocation1 | undefined {
     return this.housingLocationList.find((location) => location.id === id);
   }
+
+  submitApplication(firstName: string, lastName: string, email: string) {
+    // Simulate a form submission to a server.
+    console.log(`Application submitted by ${firstName} ${lastName} (${email})`);
+  }
 }
